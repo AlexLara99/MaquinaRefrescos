@@ -7,6 +7,11 @@ public class Refresco {
 	private int cantidad;
 	private int refrescosVendidos;
 	//constructor
+	public Refresco() {
+		tipo = "";
+		precio = 0;
+		cantidad = 0;
+	}
 	
 	public Refresco(String tipo, double precio, int cantidad) {
 		
@@ -48,6 +53,7 @@ public class Refresco {
 		System.out.println("Actualmente tienes " + this.getCantidad());
 		
 	}
+	
 	
 	
 }

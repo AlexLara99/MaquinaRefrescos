@@ -36,6 +36,9 @@ public class Maquina2 {
 		return cambio;
 	}
 
+	public Refresco[] getRefresco(){
+		return refrescos;
+	}
 	
 	
 	//informe de cantidad de refrescos y la cantidad de dinero 
@@ -61,24 +64,31 @@ public class Maquina2 {
 
 	
 	public void comprarRefresco(double dineroIntroducido, int posicion) {
-		
-		if (tieneRefresco(posicion)) {
+	
+		if(posicion >= 0 && posicion < refrescos.length) {
 			
-			if(conCambiosSuficiente(dineroIntroducido,posicion)) {
-					
-				cambio = dineroIntroducido - refrescos[posicion].getPrecio();
-				refrescos[posicion].setCantidad(refrescos[posicion].getCantidad() - 1);
-				setDinero(getDinero() + refrescos[posicion].getPrecio());
-				refrescos[posicion].setRefrescosVendidos(refrescos[posicion].getRefrescosVendidos() + 1);
-				System.out.println("Has comprado el refresco " +  refrescos[posicion].getTipo() +" , vuelva otra vez");
+			if (tieneRefresco(posicion)) {
 				
-				if(cambio != 0) {
-					System.out.println("Tome su cambio " + cambio);
+				if(conCambiosSuficiente(dineroIntroducido,posicion)) {
+						
+					cambio = dineroIntroducido - refrescos[posicion].getPrecio();			
+					refrescos[posicion].setCantidad(refrescos[posicion].getCantidad() - 1);
+					setDinero(getDinero() + refrescos[posicion].getPrecio());
+					refrescos[posicion].setRefrescosVendidos(refrescos[posicion].getRefrescosVendidos() + 1);
+					
+					System.out.println("Has comprado el refresco " +  refrescos[posicion].getTipo() +" , vuelva otra vez");
+					
+					if(cambio != 0) {
+						System.out.println("Tome su cambio " + cambio);
+					}
+					
 				}
 				
 			}
-			
-		}	
+		}else {
+			System.out.println("No has introducido bien la posicion del refresco");
+		}
+				
 		
 	}
 	
@@ -106,4 +116,20 @@ public class Maquina2 {
 		
 		
 	}
+	
+	//menu
+	
+	public void menu() {
+		
+		System.out.println("Seleccione uno de los refrescos");
+		for (int i = 0; i < refrescos.length; i++) {
+			System.out.println(1 + i + "- " + refrescos[i].getTipo());
+		}
+		System.out.println("*****");
+		System.out.println("98- Informe maquina");
+		System.out.println("99- Informe refrescos");
+		
+		
+	}
+	
 }

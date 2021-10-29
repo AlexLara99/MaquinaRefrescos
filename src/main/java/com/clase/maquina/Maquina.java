@@ -1,7 +1,10 @@
 package com.clase.maquina;
 
 public class Maquina {
-	
+	/**
+	 * Esta clase esta anticuada, mejor version en
+	 * @deprecated@Maquina2
+	 */
 	private Refresco refresco;
 	private double dinero;
 	private double cambio;

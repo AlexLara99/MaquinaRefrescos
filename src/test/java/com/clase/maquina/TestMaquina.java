@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestMaquina {
 
 	@Test
-	public void ComprarRefrescoSumaConElDineroDeDentro() {
+	public void testComprarRefrescoSumaConElDineroDeDentro() {
 		
 		Maquina2 maquina = new Maquina2(50);
 		double cantidadIntroducida = 2;
@@ -22,7 +22,7 @@ public class TestMaquina {
 	}
 	
 	@Test
-	public void ComprarRefrescoDevolviendoCambios() {
+	public void testComprarRefrescoDevolviendoCambios() {
 		
 		Maquina2 maquina = new Maquina2(70);
 		
@@ -36,7 +36,7 @@ public class TestMaquina {
 		
 	}
 	@Test
-	public void TestToString(){
+	public void testToString(){
 		Maquina2 maquina = new Maquina2(70);
 		System.out.println(maquina.toString());
 	}
@@ -68,7 +68,7 @@ public class TestMaquina {
 	}
 	
 	@Test 
-	public void venderRefrescoSinDineroEnMaquina() {
+	public void testVenderRefrescoSinDineroEnMaquina() {
 		System.out.println("Prueba deposito dinero");
 		double dineroIntroducido = 13;
 		double dineroMaquina = 0.5;
@@ -78,6 +78,31 @@ public class TestMaquina {
 			fail("Se ha producido un error con el dinero del deposito");
 		}
 		
+	}
+	
+	@Test
+	public void testComprarRefrescoConInsuficienteDinero() {
+		
+		double dineroIntroducido = 0.1;
+		Maquina2 maquina = new Maquina2(100);
+		
+		if(maquina.conCambiosSuficiente(dineroIntroducido, 0) != false)
+		{
+			fail("Se ha producido un error con el dinero del deposito");
+		}	
+		
+	}
+	
+	@Test
+	public void tesQuePasaSiPasoUnaPosicionNoExistente() {
+		int position = -1;
+		Maquina2 maquina = new Maquina2(100);
+		try {
+			maquina.comprarRefresco(1, position);
+		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+			
+			fail("Se ha producido un error con la posicion");
+		}
 	}
 
 }
