@@ -1,12 +1,18 @@
 package com.clase.maquina;
 
 public class Maquina2 {
-	//hacer arrays con refrescos
+	/**
+	 * Clase que representa la maquina que contiene refrescos que estos
+	 * mismos estaran guardados dentro de un array
+	 * 
+	 * @author Alexander Lara
+	 * @since 29/10/2021
+	 */
 	private Refresco[] refrescos;
 	private double dinero;
 	private double cambio;
 	
-	
+	//constructor
 	public Maquina2(double dinero) {
 		this.dinero = dinero;
 		refrescos = new Refresco[5];
@@ -17,7 +23,7 @@ public class Maquina2 {
 		refrescos[4] = new Refresco("Redbull", 2.0, 17);
 		
 	}
-		
+	//getters y setters	
 	public double getDinero() {
 		return dinero;
 	}
@@ -76,7 +82,7 @@ public class Maquina2 {
 		
 	}
 	
-	
+	//validaciones
 	public boolean tieneRefresco(int posicion) {
 		
 		if(refrescos[posicion].getCantidad()<=0) {

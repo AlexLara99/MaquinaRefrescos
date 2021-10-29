@@ -64,6 +64,20 @@ public class TestMaquina {
 			fail("Se ha generado mal el informe");
 		}
 		
+		
+	}
+	
+	@Test 
+	public void venderRefrescoSinDineroEnMaquina() {
+		System.out.println("Prueba deposito dinero");
+		double dineroIntroducido = 13;
+		double dineroMaquina = 0.5;
+		Maquina2 maquina = new Maquina2(dineroMaquina);
+		maquina.comprarRefresco(dineroIntroducido, 2);
+		if(maquina.getDinero() != dineroMaquina) {
+			fail("Se ha producido un error con el dinero del deposito");
+		}
+		
 	}
 
 }
