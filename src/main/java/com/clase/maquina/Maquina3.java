@@ -1,6 +1,6 @@
 package com.clase.maquina;
 
-public class Maquina2 {
+public class Maquina3 {
 	/**
 	 * Clase que representa la maquina que contiene refrescos que estos
 	 * mismos estaran guardados dentro de un array
@@ -13,7 +13,7 @@ public class Maquina2 {
 	private double cambio;
 	
 	//constructor
-	public Maquina2(double dinero) {
+	public Maquina3(double dinero) {
 		this.dinero = dinero;
 		refrescos = new Refresco[5];
 		refrescos[0] = new Refresco("Coca Cola", 1.2, 20);
@@ -63,48 +63,47 @@ public class Maquina2 {
 	}
 
 	
-	public void comprarRefresco(double dineroIntroducido, int posicion) {
+	public void comprarRefresco(double dineroIntroducido, int posicion) throws MaquinaException, CambiosException {
 		//validar datos de entrada
 		
 		//throw new IllegalArgumentException("Debe introducir un importe");
 		
-		
-		if(posicion >= 0 && posicion < refrescos.length) {
+		if(posicion < 0 && posicion > refrescos.length) {
 			
-			if (tieneRefresco(posicion)) {
-				
-				if(conCambiosSuficiente(dineroIntroducido,posicion)) {
-						
-					cambio = dineroIntroducido - refrescos[posicion].getPrecio();			
-					refrescos[posicion].setCantidad(refrescos[posicion].getCantidad() - 1);
-					setDinero(getDinero() + refrescos[posicion].getPrecio());
-					refrescos[posicion].setRefrescosVendidos(refrescos[posicion].getRefrescosVendidos() + 1);
-					
-					System.out.println("Has comprado el refresco " +  refrescos[posicion].getTipo() +" , vuelva otra vez");
-					
-					if(cambio != 0) {
-						System.out.println("Tome su cambio " + cambio);
-					}
-					
-				}
-				
-			}
-		}else {
-			System.out.println("No has introducido bien la posicion del refresco");
+			throw new MaquinaException("Maquina sin refrescos");
 		}
-				
+		
+		if(!tieneRefresco(posicion)) {
+			
+			throw new MaquinaException("Maquina sin refrescos");
+			
+		}
+		
+		if(conCambiosSuficiente(dineroIntroducido,posicion)) {
+			
+			throw new CambiosException("Cambios insuficientes");
+		}
+		
+		cambio = dineroIntroducido - refrescos[posicion].getPrecio();			
+		refrescos[posicion].setCantidad(refrescos[posicion].getCantidad() - 1);
+		setDinero(getDinero() + refrescos[posicion].getPrecio());
+		refrescos[posicion].setRefrescosVendidos(refrescos[posicion].getRefrescosVendidos() + 1);
+		
+		System.out.println("Has comprado el refresco " +  refrescos[posicion].getTipo() +" , vuelva otra vez");
+		
+		if(cambio != 0) {
+			System.out.println("Tome su cambio " + cambio);
+		}
 		
 	}
 	
 	//validaciones
-	public boolean tieneRefresco(int posicion) {
+	public boolean tieneRefresco(int posicion) throws MaquinaException {
 		
 		if(refrescos[posicion].getCantidad()<=0) {
-			System.out.println("MAQUINA SIN REFRESCOS");
-			return false;
-		}else {
-			return true;
-		}
+			throw new MaquinaException("Maquina sin refrescos");
+		}	
+		return true;
 	}
 	
 	public boolean conCambiosSuficiente(double entradaDinero, int posicion) {
